@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health & Safety Training Course - EyeCandy Training</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fbfbfd 0%, #ffffff 100%);
+            color: #2c2c2c;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f7e297 0%, #e6d080 100%);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(247, 226, 151, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #2c2c2c;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            color: #2c2c2c;
+            opacity: 0.8;
+        }
+
+        .progress-container {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f7e297 0%, #e6d080 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .level-indicator {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .level {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .level.completed {
+            background: #f7e297;
+            color: #2c2c2c;
+        }
+
+        .level.current {
+            background: #2c2c2c;
+            color: #f7e297;
+        }
+
+        .level.locked {
+            background: #e0e0e0;
+            color: #999;
+        }
+
+        .content-area {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            min-height: 500px;
+        }
+
+        .lesson-content h2 {
+            color: #2c2c2c;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #f7e297;
+            padding-bottom: 10px;
+        }
+
+        .lesson-content h3 {
+            color: #2c2c2c;
+            margin: 25px 0 15px 0;
+            font-size: 1.3rem;
+        }
+
+        .lesson-content p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        .lesson-content ul {
+            margin: 15px 0 15px 30px;
+        }
+
+        .lesson-content li {
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+
+        .callout {
+            background: linear-gradient(135deg, #f7e297 0%, #fdf7e7 100%);
+            border-left: 5px solid #e6d080;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .quiz-container {
+            background: #fbfbfd;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 30px;
+            border: 2px solid #f7e297;
+        }
+
+        .question {
+            margin-bottom: 25px;
+        }
+
+        .question h4 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            color: #2c2c2c;
+        }
+
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .option {
+            background: #ffffff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .option:hover {
+            border-color: #f7e297;
+            background: #fefdf8;
+        }
+
+        .option.selected {
+            border-color: #f7e297;
+            background: #f7e297;
+            color: #2c2c2c;
+            font-weight: 500;
+        }
+
+        .option.correct {
+            border-color: #4CAF50;
+            background: #e8f5e8;
+            color: #2d5a2d;
+        }
+
+        .option.incorrect {
+            border-color: #f44336;
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #f7e297 0%, #e6d080 100%);
+            color: #2c2c2c;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(247, 226, 151, 0.4);
+        }
+
+        .btn:disabled {
+            background: #e0e0e0;
+            color: #999;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-secondary {
+            background: #2c2c2c;
+            color: #ffffff;
+        }
+
+        .btn-secondary:hover {
+            background: #404040;
+        }
+
+        .score-display {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #f7e297 0%, #fdf7e7 100%);
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .score-display.pass {
+            background: linear-gradient(135deg, #4CAF50 0%, #81C784 100%);
+            color: white;
+        }
+
+        .score-display.fail {
+            background: linear-gradient(135deg, #f44336 0%, #e57373 100%);
+            color: white;
+        }
+
+        .certificate-container {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #f7e297 0%, #fdf7e7 100%);
+            border-radius: 15px;
+            margin: 30px 0;
+            border: 3px solid #e6d080;
+        }
+
+        .certificate {
+            background: #ffffff;
+            border: 5px solid #f7e297;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .certificate h2 {
+            font-size: 2.2rem;
+            color: #2c2c2c;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #f7e297;
+            padding-bottom: 10px;
+        }
+
+        .certificate .student-name {
+            font-size: 1.8rem;
+            color: #2c2c2c;
+            font-weight: bold;
+            margin: 20px 0;
+            text-decoration: underline;
+            text-decoration-color: #f7e297;
+        }
+
+        .accreditation {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f7e297;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #2c2c2c;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content-area {
+                padding: 20px;
+            }
+            
+            .level-indicator {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Health & Safety Training Course</h1>
+            <p class="subtitle">EyeCandy Training - IPHM Accredited</p>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="level-indicator">
+                <div class="level current" data-level="1">Level 1: Introduction</div>
+                <div class="level locked" data-level="2">Level 2: Hazard Identification</div>
+                <div class="level locked" data-level="3">Level 3: Risk Reduction</div>
+                <div class="level locked" data-level="4">Level 4: Legal Responsibilities</div>
+                <div class="level locked" data-level="5">Level 5: Final Assessment</div>
+            </div>
+        </div>
+
+        <div class="content-area" id="contentArea">
+            <!-- Content will be dynamically loaded here -->
+        </div>
+
+        <div class="certificate-container hidden" id="certificateContainer">
+            <div class="certificate" id="certificate">
+                <h2>Certificate of Completion</h2>
+                <p>This is to certify that</p>
+                <div class="student-name" id="studentName">Student Name</div>
+                <p>has successfully completed the</p>
+                <h3>Health & Safety Training Course</h3>
+                <p>achieving a score of <span id="finalScore">0</span>%</p>
+                <div class="accreditation">
+                    IPHM Accredited - EyeCandy Training
+                </div>
+                <p>Date: <span id="certificateDate"></span></p>
+            </div>
+            <button class="btn" onclick="downloadCertificate()">Download Certificate</button>
+        </div>
+    </div>
+
+    <script>
+        class HealthSafetyTraining {
+            constructor() {
+                this.currentLevel = 1;
+                this.scores = {};
+                this.studentName = '';
+                this.levels = {
+                    1: this.createLevel1(),
+                    2: this.createLevel2(),
+                    3: this.createLevel3(),
+                    4: this.createLevel4(),
+                    5: this.createLevel5()
+                };
+                this.init();
+            }
+
+            init() {
+                this.askStudentName();
+                this.loadLevel(1);
+                this.updateProgress();
+            }
+
+            askStudentName() {
+                const name = prompt("Please enter your full name for the certificate:");
+                this.studentName = name || "Student";
+                document.getElementById('studentName').textContent = this.studentName;
+            }
+
+            createLevel1() {
+                return {
+                    title: "Introduction to Health & Safety",
+                    content: `
+                        <h2>Level 1: Introduction to Health & Safety</h2>
+                        
+                        <h3>Welcome to Your Health & Safety Training</h3>
+                        <p>This comprehensive course is designed to ensure you understand your responsibilities and legal duties for health and safety in the workplace. Based on the VTCT unit US11G20, this training will help you identify hazards, evaluate risks, and take appropriate action to protect yourself and others.</p>
+                        
+                        <div class="callout">
+                            <strong>Learning Objectives:</strong> By the end of this course, you will be able to identify hazards, evaluate risks, reduce risks to health and safety, and understand your legal responsibilities in the workplace.
+                        </div>
+                        
+                        <h3>What is Health & Safety?</h3>
+                        <p>Health and safety is about protecting people from harm in the workplace. It involves:</p>
+                        <ul>
+                            <li>Identifying potential hazards and risks</li>
+                            <li>Taking steps to control or eliminate these risks</li>
+                            <li>Following legal requirements and workplace procedures</li>
+                            <li>Maintaining a safe working environment for everyone</li>
+                        </ul>
+                        
+                        <h3>Why is Health & Safety Important?</h3>
+                        <p>Health and safety is crucial because:</p>
+                        <ul>
+                            <li>It protects you and your colleagues from injury or illness</li>
+                            <li>It's a legal requirement for all workplaces</li>
+                            <li>It reduces accidents and associated costs</li>
+                            <li>It creates a positive working environment</li>
+                            <li>It demonstrates care for employee wellbeing</li>
+                        </ul>
+                        
+                        <div class="callout">
+                            <strong>Remember:</strong> Everyone in the workplace has a responsibility for health and safety, regardless of their job role or level of employment.
+                        </div>
+                    `,
+                    quiz: [
+                        {
+                            question: "Health and safety is the responsibility of:",
+                            options: [
+                                "Only managers and supervisors",
+                                "Only health and safety officers",
+                                "Everyone in the workplace",
+                                "Only full-time employees"
+                            ],
+                            correct: 2
+                        },
+                        {
+                            question: "The main purpose of health and safety is to:",
+                            options: [
+                                "Reduce insurance costs",
+                                "Protect people from harm",
+                                "Satisfy legal requirements only",
+                                "Improve company image"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            question: "Which of the following is NOT a benefit of good health and safety practices?",
+                            options: [
+                                "Reduced accidents",
+                                "Positive working environment",
+                                "Increased paperwork",
+                                "Legal compliance"
+                            ],
+                            correct: 2
+                        },
+                        {
+                            question: "Health and safety applies to:",
+                            options: [
+                                "Only dangerous workplaces",
+                                "All workplaces",
+                                "Only industrial settings",
+                                "Only offices with more than 50 employees"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            question: "Your health and safety responsibilities include:",
+                            options: [
+                                "Only following instructions",
+                                "Only reporting accidents",
+                                "Identifying hazards and following safe practices",
+                                "Only attending training sessions"
+                            ],
+                            correct: 2
+                        }
+                    ]
+                };
+            }
+
+            createLevel2() {
+                return {
+                    title: "Hazard Identification & Risk Evaluation",
+                    content: `
+                        <h2>Level 2: Hazard Identification & Risk Evaluation</h2>
+                        
+                        <h3>Understanding Hazards and Risks</h3>
+                        <p>Before you can protect yourself and others, you must understand the fundamental difference between hazards and risks. This distinction is crucial for effective workplace safety:</p>
+                        
+                        <div class="callout">
+                            <strong>Hazard:</strong> Anything that has the potential to cause harm, injury, or damage. Examples include wet floors, chemicals, loud noise, or faulty equipment.<br><br>
+                            <strong>Risk:</strong> The likelihood (probability) that a hazard will actually cause harm, combined with the severity of that potential harm.
+                        </div>
+                        
+                        <h3>Real-World Example</h3>
+                        <p><strong>Scenario:</strong> There's a wet floor in a busy corridor.</p>
+                        <p><strong>Hazard:</strong> The wet floor itself</p>
+                        <p><strong>Risk:</strong> High likelihood that someone will slip and fall, potentially causing serious injury due to the busy location</p>
+                        
+                        <h3>Common Workplace Hazards</h3>
+                        <p>Workplace hazards can be categorized into five main types. Understanding these categories helps you systematically identify potential dangers:</p>
+                        
+                        <h4>1. Physical Hazards</h4>
+                        <ul>
+                            <li><strong>Slips, trips, and falls:</strong> Wet floors, uneven surfaces, loose cables, poor lighting</li>
+                            <li><strong>Struck by objects:</strong> Falling tools, moving machinery, vehicles</li>
+                            <li><strong>Cuts and lacerations:</strong> Sharp tools, broken glass, metal edges</li>
+                            <li><strong>Environmental factors:</strong> Excessive noise, vibration, extreme temperatures</li>
+                            <li><strong>Electrical hazards:</strong> Exposed wiring, overloaded circuits, wet electrical equipment</li>
+                        </ul>
+                        
+                        <h4>2. Chemical Hazards</h4>
+                        <ul>
+                            <li><strong>Cleaning products:</strong> Bleach, disinfectants, degreasers</li>
+                            <li><strong>Industrial chemicals:</strong> Solvents, acids, adhesives</li>
+                            <li><strong>Gases and vapors:</strong> Carbon monoxide, welding fumes, paint vapors</li>
+                            <li><strong>Dust particles:</strong> Wood dust, metal particles, asbestos fibers</li>
+                        </ul>
+                        
+                        <h4>3. Biological Hazards</h4>
+                        <ul>
+                            <li><strong>Infectious diseases:</strong> Bacteria, viruses, fungi</li>
+                            <li><strong>Blood-borne pathogens:</strong> Hepatitis, HIV</li>
+                            <li><strong>Animal-related:</strong> Bites, stings, animal waste</li>
+                            <li><strong>Plant allergens:</strong> Pollen, poisonous plants</li>
+                        </ul>
+                        
+                        <h4>4. Ergonomic Hazards</h4>
+                        <ul>
+                            <li><strong>Manual handling:</strong> Heavy lifting, awkward carrying positions</li>
+                            <li><strong>Repetitive motions:</strong> Typing, assembly line work, packaging</li>
+                            <li><strong>Poor posture:</strong> Incorrect seating, reaching overhead, bending</li>
+                            <li><strong>Workplace design:</strong> Inadequate workspace, poor tool design</li>
+                        </ul>
+                        
+                        <h4>5. Psychosocial Hazards</h4>
+                        <ul>
+                            <li><strong>Work-related stress:</strong> Excessive workload, tight deadlines</li>
+                            <li><strong>Workplace violence:</strong> Aggression, bullying, harassment</li>
+                            <li><strong>Fatigue:</strong> Long hours, shift work, insufficient breaks</li>
+                            <li><strong>Isolation:</strong> Working alone, lack of social support</li>
+                        </ul>
+                        
+                        <h3>Risk Assessment Process</h3>
+                        <p>Effective risk assessment follows a systematic 5-step approach:</p>
+                        
+                        <div class="callout">
+                            <strong>Step 1: Identify Hazards</strong><br>
+                            Look around your workplace systematically. What could cause harm? Consider normal operations, maintenance activities, and emergency situations.
+                        </div>
+                        
+                        <ol>
+                            <li><strong>Identify the hazard:</strong> What could cause harm? Be specific - don't just say "chemicals," identify which chemicals and where they're used.</li>
+                            <li><strong>Identify who might be harmed:</strong> Employees, visitors, contractors, cleaners, maintenance staff? Consider vulnerable groups like pregnant workers or those with disabilities.</li>
+                            <li><strong>Evaluate the risk:</strong> Consider both likelihood and severity. A rare but potentially fatal hazard might be higher priority than a common minor one.</li>
+                            <li><strong>Record significant findings:</strong> Document your assessment, especially for significant risks that require ongoing management.</li>
+                            <li><strong>Review and update regularly:</strong> Reassess when conditions change, after incidents, or at least annually.</li>
+                        </ol>
+                        
+                        <h3>Risk Evaluation Factors</h3>
+                        <p>When evaluating risks, consider these key factors:</p>
+                        
+                        <h4>Likelihood Factors:</h4>
+                        <ul>
+                            <li>How often is the hazard encountered?</li>
+                            <li>How many people are exposed?</li>
+                            <li>Are there existing control measures?</li>
+                            <li>What's the history of incidents?</li>
+                        </ul>
+                        
+                        <h4>Severity Factors:</h4>
+                        <ul>
+                            <li>Minor injury (first aid only)</li>
+                            <li>Major injury (hospital treatment required)</li>
+                            <li>Permanent disability or fatality</li>
+                            <li>Multiple casualties</li>
+                        </ul>
+                        
+                        <h3>Your Role in Hazard Identification</h3>
+                        <p>As an employee, you play a vital role in maintaining workplace safety:</p>
+                        
+                        <h4>Daily Responsibilities:</h4>
+                        <ul>
+                            <li><strong>Stay alert:</strong> Actively look for hazards during your work activities</li>
+                            <li><strong>Use your senses:</strong> Listen for unusual noises, smell for gas leaks or chemical odors, look for visual signs of danger</li>
+                            <li><strong>Think ahead:</strong> Consider "what if" scenarios - what could go wrong?</li>
+                            <li><strong>Learn from others:</strong> Pay attention to incident reports and safety briefings</li>
+                        </ul>
+                        
+                        <h4>Reporting Procedures:</h4>
+                        <ul>
+                            <li><strong>Report immediately:</strong> Don't wait - report hazards as soon as you identify them</li>
+                            <li><strong>Be specific:</strong> Provide clear details about the location, nature of the hazard, and potential consequences</li>
+                            <li><strong>Follow up:</strong> Ensure your report has been received and action is being taken</li>
+                            <li><strong>Document:</strong> Keep a record of what you reported and when</li>
+                        </ul>
+                        
+                        <h3>Hazard Spotting Techniques</h3>
+                        <p>Develop these skills to become more effective at hazard identification:</p>
+                        
+                        <h4>The "Fresh Eyes" Approach:</h4>
+                        <p>Periodically look at your workplace as if seeing it for the first time. Familiarity can make us blind to obvious hazards.</p>
+                        
+                        <h4>Systematic Inspection:</h4>
+                        <ul>
+                            <li>Start at one point and work methodically around the area</li>
+                            <li>Look up (overhead hazards), down (floor hazards), and around (environmental hazards)</li>
+                            <li>Consider different times of day and weather conditions</li>
+                        </ul>
+                        
+                        <h4>Near Miss Learning:</h4>
+                        <p>Pay attention to near misses - they often indicate where the next accident might occur. A near miss is a free lesson in what could go wrong.</p>
+                        
+                        <div class="callout">
+                            <strong>Remember:</strong> Effective hazard identification requires active participation from everyone. Your observations and reports contribute to creating a safer workplace for all.
+                        </div>
+                    `,
+                    quiz: [
+                        {
+                            question: "A hazard is:",
+                            options: [
+                                "The likelihood of harm occurring",
+                                "Anything with potential to cause harm",
+                                "An accident that has already happened",
+                                "A safety procedure"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            question: "Risk is:",
+                            options: [
+                                "The same as a hazard",
+                                "Only about severe injuries",
+                                "The likelihood and severity of harm from a hazard",
+                                "Something that only affects others"
+                            ],
+                            correct: 2
+                        },
+                        {
+                            question: "Which is an example of a physical hazard?",
+                            options: [
+                                "Toxic chemicals",
+                                "Workplace stress",
+                                "Bacteria",
+                                "Wet floors"
+                            ],
+                            correct: 3
+                        },
+                        {
+                            question: "When should you report a hazard?",
+                            options: [
+                                "Only if someone gets injured",
+                                "As soon as you identify it",
+                                "At the end of the week",
+                                "Only if it affects you personally"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            question: "Risk assessment should be:",
+                            options: [
+                                "Done once and never changed",
+                                "Only done by managers",
+                                "Reviewed and updated regularly",
+                                "Only necessary for dangerous jobs"
+                            ],
+                            correct: 2
+                        }
+                    ]
+                };
+            }
+
+            createLevel3() {
+                return {
+                    title: "Risk Reduction & Control Measures",
+                    content: `
+                        <h2>Level 3: Risk Reduction & Control Measures</h2>
+                        
+                        <h3>Hierarchy of Control</h3>
+                        <p>There's a preferred order for controlling risks, known as the hierarchy of control:</p>
+                        
+                        <ol>
+                            <li><strong>Elimination:</strong> Remove the hazard completely</li>
+                            <li><strong>Substitution:</strong> Replace with something less hazardous</li>
+                            <li><strong>Engineering controls:</strong> Isolate or reduce exposure (guards, ventilation)</li>
+                            <li><strong>Administrative controls:</strong> Change work practices (training, procedures)</li>
+                            <li><strong>Personal Protective Equipment (PPE):</strong> Last line of defense</li>
+                        </ol>
+                        
+                        <div class="callout">
+                            <strong>Important:</strong> PPE should never be the first choice for controlling risks. It should only be used when other control measures are not practical or as additional protection.
+                        </div>
+                        
+                        <h3>Safe Working Practices</h3>
+                        <p>To reduce risks in your daily work:</p>
+                        <ul>
+                            <li>Follow all workplace procedures and instructions</li>
+                            <li>Use equipment and materials as instructed</li>
+                            <li>Maintain good housekeeping standards</li>
+                            <li>Report defects and concerns immediately</li>
+                            <li>Wear appropriate PPE when required</li>
+                            <li>Take regular breaks to avoid fatigue</li>
+                        </ul>
+                        
+                        <h3>Equipment and Materials Safety</h3>
+                        <p>When using equipment and materials:</p>
+                        <ul>
+                            <li>Read and follow manufacturer's instructions</li>
+                            <li>Ensure equipment is in good working order</li>
+                            <li>Use the right tool for the job</li>
+                            <li>Store materials safely and securely</li>
+                            <li>Report any discrepancies between workplace and manufacturer instructions</li>
+                        </ul>
+                        
+                        <h3>Personal Behavior and Presentation</h3>
+                        <p>Your personal behavior affects safety:</p>
+                        <ul>
+                            <li>Dress appropriately for your work environment</li>
+                            <li>Avoid behaviors that could endanger others</li>
+                            <li>Stay alert and focused on your tasks</li>
+                            <li>Communicate effectively about safety issues</li>
+                            <li>Lead by example in following safety procedures</li>
+                        </ul>
+                    `,
+                    quiz: [
+                        {
+                            question: "In the hierarchy of control, what should be tried first?",
+                            options: [
+                                "Personal Protective Equipment",
+                                "Training and procedures",
+                                "Elimination of the hazard",
+                                "Engineering controls"
+                            ],
+                            correct: 2
+                        },
+                        {
+                            question: "PPE should be used:",
+                            options: [
+                                "As the primary control method",
+                                "When other controls are not practical or as additional protection",
+                                "Only by managers",
+                                "Only in emergency situations"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            question: "If you notice a difference between workplace instructions and manufacturer's instructions, you should:",
+                            options: [
+                                "Follow the workplace instructions only",
+                                "Follow the manufacturer's instructions only",
+                                "Report the discrepancy",
+                                "Ignore both sets of instructions"
+                            ],
+                            correct: 2
+                        },
+                        {
+                            question: "Good housekeeping in the workplace includes:",
+                            options: [
+                                "Keeping work areas tidy and organized",
+                                "Only cleaning at the end of the day",
+                                "Leaving cleaning to designated staff only",
+                                "Storing everything in convenient places"
+                            ],
+                            correct: 0
+                        },
+                        {
+                            question: "Your personal behavior affects workplace safety:",
+                            options: [
+                                "Only when working with others",
+                                "Only in dangerous areas",
+                                "At all times in the workplace",
+                                "Only during formal safety inspections"
+                            ],
+                            correct: 2
+                        }
+                    ]
+                };
+            }
+
+            createLevel4() {
+                return {
+                    title: "Legal Responsibilities & Reporting",
+                    content: `
+                        <h2>Level 4: Legal Responsibilities & Reporting</h2>
+                        
+                        <h3>Legal Framework</h3>
+                        <p>Health and safety law places duties on both employers and employees:</p>
+                        
+                        <h4>Employer Duties:</h4>
+                        <ul>
+                            <li>Provide a safe workplace and safe systems of work</li>
+                            <li>Ensure safe handling, storage and transport of substances</li>
+                            <li>Provide information, instruction, training and supervision</li>
+                            <li>Provide adequate welfare facilities</li>
+                            <li>Consult with employees on health and safety matters</li>
+                        </ul>
+                        
+                        <h4>Employee Duties:</h4>
+                        <ul>
+                            <li>Take reasonable care of your own health and safety</li>
+                            <li>Take reasonable care of others who might be affected by your actions</li>
+                            <li>Cooperate with your employer on health and safety matters</li>
+                            <li>Not interfere with or misuse safety equipment</li>
+                            <li>Report hazards and incidents</li>
+                        </ul>
+                        
+                        <div class="callout">
+                            <strong>Remember:</strong> These are legal duties, not just guidelines. Failure to comply can result in prosecution and penalties.
+                        </div>
+                        
+                        <h3>Key Responsible People</h3>
+                        <p>Know who to contact for health and safety matters:</p>
+                        <ul>
+                            <li><strong>Direct supervisor/manager:</strong> Day-to-day safety issues</li>
+                            <li><strong>Health and Safety Officer:</strong> Specialist advice and serious concerns</li>
+                            <li><strong>First Aiders:</strong> Medical emergencies and incidents</li>
+                            <li><strong>Safety Representatives:</strong> Employee representatives for safety matters</li>
+                        </ul>
+                        
+                        <h3>Reporting Procedures</h3>
+                        <p>You must report:</p>
+                        <ul>
+                            <li>All accidents and incidents, no matter how minor</li>
+                            <li>Near misses and dangerous occurrences</li>
+                            <li>Health and safety hazards</li>
+                            <li>Defective equipment or protective equipment</li>
+                            <li>Any concerns about workplace safety</li>
+                        </ul>
+                        
+                        <h3>Environmental Responsibilities</h3>
+                        <p>Consider environmental impact in your work:</p>
+                        <ul>
+                            <li>Minimize waste and energy consumption</li>
+                            <li>Dispose of waste materials correctly</li>
+                            <li>Use environmentally friendly practices where possible</li>
+                            <li>Report environmental hazards (spills, emissions)</li>
+                            <li>Follow workplace environmental policies</li>
+                        </ul>
+                        
+                        <h3>Getting Additional Help</h3>
+                        <p>Sources of additional health and safety assistance:</p>
+                        <ul>
+                            <li>Company health and safety policies and procedures</li>
+                            <li>Training programs and resources</li>
+                            <li>Professional health and safety consultants</li>
+                            <li>Health and Safety Executive (HSE) guidance</li>
+                            <li>Trade union safety representatives</li>
+                        </ul>
+                    `,
+                    quiz: [
+                        {
+                            question: "Under health and safety law, employees must:",
+                            options: [
+                                "Only follow instructions they agree with",
+                                "Take reasonable care of their own and others' safety",
+                                "Only report accidents if they are serious",
+                                "Only cooperate when specifically asked"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            question: "You should report health and safety concerns to:",
+                            options: [
+                                "Only your immediate supervisor",
+                                "Only if someone gets injured",
+                                "The appropriate responsible person in your workplace",
+                                "Only at the end of each month"
+                            ],
+                            correct: 2
+                        },
+                        {
+                            question: "Near misses should be:",
+                            options: [
+                                "Ignored if no one was hurt",
+                                "Reported and investigated",
+                                "Only mentioned informally",
+                                "Kept confidential"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            question: "Environmental responsibilities in the workplace include:",
+                            options: [
+                                "Only what's required by law",
+                                "Minimizing waste and following environmental policies",
+                                "Only disposing of hazardous waste correctly",
+                                "Only concerns about air pollution"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            question: "If you're unsure about a health and safety matter, you should:",
+                            options: [
+                                "Proceed anyway and hope for the best",
+                                "Ask a colleague who might know",
+                                "Seek guidance from the appropriate responsible person",
+                                "Wait until someone else raises the issue"
+                            ],
+                            correct: 2
+                        }
+                    ]
+                };
+            }
+
+            createLevel5() {
+                return {
+                    title: "Final Assessment",
+                    content: `
+                        <h2>Level 5: Final Assessment</h2>
+                        
+                        <p>This is your final assessment covering all aspects of the Health & Safety Training Course. You must achieve 80% or higher to successfully complete the course and receive your certificate.</p>
+                        
+                        <div class="callout">
+                            <strong>Assessment Criteria:</strong> This assessment covers all learning outcomes from the course including hazard identification, risk evaluation, control measures, and legal responsibilities.
+                        </div>
+                        
+                        <h3>Course Summary</h3>
+                        <p>Throughout this course, you have learned:</p>
+                        <ul>
+                            <li>The fundamental concepts of health and safety</li>
+                            <li>How to identify hazards and evaluate risks</li>
+                            <li>Methods for reducing and controlling risks</li>
+                            <li>Your legal responsibilities and duties</li>
+                            <li>Proper reporting procedures and when to seek help</li>
+                        </ul>
+                        
+                        <p>Take your time with this assessment and apply the knowledge you've gained throughout the course. Good luck!</p>
+                    `,
+                    quiz: [
+                        {
+                            question: "The primary purpose of health and safety legislation is to:",
+                            options: [
+                                "Increase paperwork and bureaucracy",
+                                "Protect people from workplace harm",
+                                "Generate revenue through fines",
+                                "Create jobs for safety officers"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            question: "A risk assessment should identify:",
+                            options: [
+                                "Only the most obvious hazards",
+                                "All potential hazards and who might be harmed",
+                                "Only hazards that have caused accidents before",
+                                "Only hazards in high-risk areas"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            question: "In the hierarchy of control, which is the LEAST preferred method?",
+                            options: [
+                                "Elimination",
+                                "Engineering controls",
+                                "Personal Protective Equipment",
+                                "Substitution"
+                            ],
+                            correct: 2
+                        },
+                        {
+                            question: "You have a legal duty to:",
+                            options: [
+                                "Only follow safety rules you understand",
+                                "Report only serious accidents",
+                                "Take reasonable care for your safety and that of others",
+                                "Only use PPE when supervised"
+                            ],
+                            correct: 2
+                        },
+                        {
+                            question: "If you identify a hazard that you cannot deal with yourself, you should:",
+                            options: [
+                                "Ignore it if it doesn't affect your work",
+                                "Try to fix it anyway",
+                                "Report it to the appropriate responsible person",
+                                "Wait to see if someone else notices it"
+                            ],
+                            correct: 2
+                        },
+                        {
+                            question: "Environmental responsibilities in the workplace include:",
+                            options: [
+                                "Only following legal requirements",
+                                "Minimizing waste and following environmental policies",
+                                "Only disposing of hazardous materials properly",
+                                "Leaving environmental issues to specialists"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            question: "Safe working practices include:",
+                            options: [
+                                "Following procedures only when convenient",
+                                "Using equipment however seems fastest",
+                                "Following workplace and manufacturer instructions",
+                                "Adapting procedures based on personal experience"
+                            ],
+                            correct: 2
+                        },
+                        {
+                            question: "You should report workplace hazards:",
+                            options: [
+                                "Only if they directly affect you",
+                                "As soon as you identify them",
+                                "At the end of each week",
+                                "Only if they seem very dangerous"
+                            ],
+                            correct: 1
+                        },
+                        {
+                            question: "Personal presentation and behavior affect workplace safety because:",
+                            options: [
+                                "They only matter for customer-facing roles",
+                                "They can influence how others perceive safety",
+                                "They can create hazards or safety risks",
+                                "They are required by company policy only"
+                            ],
+                            correct: 2
+                        },
+                        {
+                            question: "When should you seek additional health and safety assistance?",
+                            options: [
+                                "Only during emergencies",
+                                "Only if required by your job description",
+                                "Whenever you're unsure about safety matters",
+                                "Only if specifically asked by management"
+                            ],
+                            correct: 2
+                        }
+                    ]
+                };
+            }
+
+            loadLevel(level) {
+                const contentArea = document.getElementById('contentArea');
+                const levelData = this.levels[level];
+                
+                if (!levelData) return;
+
+                this.currentLevel = level;
+                
+                contentArea.innerHTML = `
+                    <div class="lesson-content">
+                        ${levelData.content}
+                    </div>
+                    <div class="quiz-container">
+                        <h3>Knowledge Check</h3>
+                        <p>Complete this quiz to proceed to the next level. You need 80% or higher to pass.</p>
+                        <div id="quiz-${level}"></div>
+                        <div class="quiz-controls">
+                            <button class="btn" onclick="training.submitQuiz(${level})" id="submitBtn-${level}">Submit Quiz</button>
+                            <button class="btn btn-secondary hidden" onclick="training.proceedToNext(${level})" id="nextBtn-${level}">Continue to Next Level</button>
+                        </div>
+                        <div id="results-${level}"></div>
+                    </div>
+                `;
+
+                this.renderQuiz(level);
+                this.updateLevelIndicators();
+            }
+
+            renderQuiz(level) {
+                const quiz = this.levels[level].quiz;
+                const quizContainer = document.getElementById(`quiz-${level}`);
+                
+                const quizHTML = quiz.map((q, index) => `
+                    <div class="question">
+                        <h4>${index + 1}. ${q.question}</h4>
+                        <div class="options">
+                            ${q.options.map((option, optIndex) => `
+                                <div class="option" onclick="training.selectOption(${level}, ${index}, ${optIndex})" 
+                                     data-question="${index}" data-option="${optIndex}">
+                                    ${option}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
+
+                quizContainer.innerHTML = quizHTML;
+            }
+
+            selectOption(level, questionIndex, optionIndex) {
+                const questionElement = document.querySelector(`#quiz-${level} .question:nth-child(${questionIndex + 1})`);
+                const options = questionElement.querySelectorAll('.option');
+                
+                // Clear previous selections
+                options.forEach(opt => opt.classList.remove('selected'));
+                
+                // Select current option
+                options[optionIndex].classList.add('selected');
+                options[optionIndex].dataset.selected = 'true';
+                
+                // Clear selected state from other options
+                options.forEach((opt, idx) => {
+                    if (idx !== optionIndex) {
+                        opt.dataset.selected = 'false';
+                    }
+                });
+            }
+
+            submitQuiz(level) {
+                const quiz = this.levels[level].quiz;
+                const quizContainer = document.getElementById(`quiz-${level}`);
+                const questions = quizContainer.querySelectorAll('.question');
+                
+                let score = 0;
+                let answered = 0;
+
+                questions.forEach((question, qIndex) => {
+                    const selectedOption = question.querySelector('.option[data-selected="true"]');
+                    
+                    if (selectedOption) {
+                        answered++;
+                        const selectedIndex = parseInt(selectedOption.dataset.option);
+                        const correctIndex = quiz[qIndex].correct;
+                        
+                        // Show correct/incorrect
+                        const options = question.querySelectorAll('.option');
+                        options.forEach((opt, optIndex) => {
+                            opt.style.pointerEvents = 'none';
+                            if (optIndex === correctIndex) {
+                                opt.classList.add('correct');
+                            } else if (optIndex === selectedIndex && selectedIndex !== correctIndex) {
+                                opt.classList.add('incorrect');
+                            }
+                        });
+
+                        if (selectedIndex === correctIndex) {
+                            score++;
+                        }
+                    }
+                });
+
+                if (answered !== quiz.length) {
+                    alert('Please answer all questions before submitting.');
+                    return;
+                }
+
+                const percentage = Math.round((score / quiz.length) * 100);
+                this.scores[level] = percentage;
+
+                this.showResults(level, score, quiz.length, percentage);
+                
+                // Disable submit button
+                document.getElementById(`submitBtn-${level}`).disabled = true;
+            }
+
+            showResults(level, score, total, percentage) {
+                const resultsContainer = document.getElementById(`results-${level}`);
+                const passed = percentage >= 80;
+                
+                resultsContainer.innerHTML = `
+                    <div class="score-display ${passed ? 'pass' : 'fail'}">
+                        <h3>Quiz Results</h3>
+                        <p>Score: ${score}/${total} (${percentage}%)</p>
+                        <p>${passed ? 'Congratulations! You passed this level.' : 'You need 80% to pass. Please review the material and try again.'}</p>
+                    </div>
+                `;
+
+                if (passed) {
+                    if (level < 5) {
+                        document.getElementById(`nextBtn-${level}`).classList.remove('hidden');
+                    } else {
+                        // Final assessment passed - show certificate
+                        this.showCertificate();
+                    }
+                } else {
+                    // Allow retake
+                    setTimeout(() => {
+                        document.getElementById(`submitBtn-${level}`).disabled = false;
+                        document.getElementById(`submitBtn-${level}`).textContent = 'Retake Quiz';
+                        this.renderQuiz(level);
+                    }, 3000);
+                }
+            }
+
+            proceedToNext(currentLevel) {
+                if (currentLevel < 5) {
+                    this.loadLevel(currentLevel + 1);
+                    this.updateProgress();
+                }
+            }
+
+            updateProgress() {
+                const progress = ((this.currentLevel - 1) / 4) * 100;
+                document.getElementById('progressFill').style.width = progress + '%';
+            }
+
+            updateLevelIndicators() {
+                const indicators = document.querySelectorAll('.level');
+                indicators.forEach((indicator, index) => {
+                    const levelNum = index + 1;
+                    indicator.classList.remove('current', 'completed', 'locked');
+                    
+                    if (levelNum < this.currentLevel || (levelNum <= this.currentLevel && this.scores[levelNum] >= 80)) {
+                        indicator.classList.add('completed');
+                    } else if (levelNum === this.currentLevel) {
+                        indicator.classList.add('current');
+                    } else {
+                        indicator.classList.add('locked');
+                    }
+                });
+            }
+
+            showCertificate() {
+                const overallScore = Object.values(this.scores).reduce((a, b) => a + b, 0) / Object.keys(this.scores).length;
+                
+                document.getElementById('finalScore').textContent = Math.round(overallScore);
+                document.getElementById('certificateDate').textContent = new Date().toLocaleDateString();
+                document.getElementById('certificateContainer').classList.remove('hidden');
+                
+                // Update progress to 100%
+                document.getElementById('progressFill').style.width = '100%';
+                this.updateLevelIndicators();
+            }
+        }
+
+        // Initialize the training when page loads
+        let training;
+        window.addEventListener('DOMContentLoaded', function() {
+            training = new HealthSafetyTraining();
+        });
+
+        // Certificate download function
+        function downloadCertificate() {
+            const certificate = document.getElementById('certificate');
+            const studentName = document.getElementById('studentName').textContent;
+            const score = document.getElementById('finalScore').textContent;
+            const date = document.getElementById('certificateDate').textContent;
+            
+            // Create a new window for printing
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Health & Safety Certificate - ${studentName}</title>
+                    <style>
+                        body {
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            margin: 0;
+                            padding: 20px;
+                            background: #ffffff;
+                        }
+                        .certificate {
+                            background: #ffffff;
+                            border: 5px solid #f7e297;
+                            border-radius: 15px;
+                            padding: 40px;
+                            margin: 20px auto;
+                            max-width: 600px;
+                            text-align: center;
+                            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                        }
+                        .certificate h2 {
+                            font-size: 2.2rem;
+                            color: #2c2c2c;
+                            margin-bottom: 20px;
+                            border-bottom: 3px solid #f7e297;
+                            padding-bottom: 10px;
+                        }
+                        .student-name {
+                            font-size: 1.8rem;
+                            color: #2c2c2c;
+                            font-weight: bold;
+                            margin: 20px 0;
+                            text-decoration: underline;
+                            text-decoration-color: #f7e297;
+                        }
+                        .accreditation {
+                            margin: 20px 0;
+                            padding: 15px;
+                            background: #f7e297;
+                            border-radius: 8px;
+                            font-weight: bold;
+                            color: #2c2c2c;
+                        }
+                        @media print {
+                            body { margin: 0; }
+                            .certificate { box-shadow: none; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="certificate">
+                        <h2>Certificate of Completion</h2>
+                        <p>This is to certify that</p>
+                        <div class="student-name">${studentName}</div>
+                        <p>has successfully completed the</p>
+                        <h3>Health & Safety Training Course</h3>
+                        <p>achieving a score of ${score}%</p>
+                        <div class="accreditation">
+                            IPHM Accredited - EyeCandy Training
+                        </div>
+                        <p>Date: ${date}</p>
+                    </div>
+                </body>
+                </html>
+            `);
+            
+            printWindow.document.close();
+            printWindow.focus();
+            
+            // Trigger print dialog
+            setTimeout(() => {
+                printWindow.print();
+            }, 250);
+        }
+    </script>
+</body>
+</html>
